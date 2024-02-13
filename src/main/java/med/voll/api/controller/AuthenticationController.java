@@ -33,7 +33,6 @@ public class AuthenticationController {
 
             return ResponseEntity.ok(new CreateTokenJWTDTO(tokenJwt));
         } catch (Exception e){
-            e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
