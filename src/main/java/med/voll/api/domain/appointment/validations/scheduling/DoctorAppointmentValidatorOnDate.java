@@ -1,4 +1,4 @@
-package med.voll.api.domain.appointment.validations;
+package med.voll.api.domain.appointment.validations.scheduling;
 
 import jakarta.validation.ValidationException;
 import med.voll.api.domain.appointment.CreateScheduleDTO;
@@ -12,7 +12,7 @@ public class DoctorAppointmentValidatorOnDate implements IAppointmentSchedulingV
     private IAppointmentRepository repository;
 
     public void valid(CreateScheduleDTO scheduleDTO){
-        Boolean IsAppointment = repository.existsByDoctorIdAndData(scheduleDTO.idDoctor(), scheduleDTO.data());
+        Boolean IsAppointment = repository.existsByDoctorIdAndDataAndCancelledIsFalse(scheduleDTO.idDoctor(), scheduleDTO.data());
 
         if (IsAppointment)
             throw new ValidationException("Doutor já possui consulta nesse horário");

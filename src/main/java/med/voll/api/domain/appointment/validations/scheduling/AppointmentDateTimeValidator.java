@@ -1,4 +1,4 @@
-package med.voll.api.domain.appointment.validations;
+package med.voll.api.domain.appointment.validations.scheduling;
 
 import jakarta.validation.ValidationException;
 import med.voll.api.domain.appointment.CreateScheduleDTO;

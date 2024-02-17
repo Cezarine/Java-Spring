@@ -22,7 +22,8 @@ public interface IDoctorRepository extends JpaRepository<Doctor, Long> {
                 a.doctor.id
               FROM
                 Appointment a
-              WHERE a.data = :dateTime)
+              WHERE a.data = :dateTime
+                AND a.cancelled = FALSE)
             ORDER BY RAND()
             LIMIT 1
             """)

@@ -1,7 +1,8 @@
 package med.voll.api.domain.appointment;
 
 import jakarta.validation.ValidationException;
-import med.voll.api.domain.appointment.validations.IAppointmentSchedulingValidator;
+import med.voll.api.domain.appointment.validations.cancellation.ICancellationSchedulerValidator;
+import med.voll.api.domain.appointment.validations.scheduling.IAppointmentSchedulingValidator;
 import med.voll.api.domain.doctor.IDoctorRepository;
 import med.voll.api.domain.doctor.Doctor;
 import med.voll.api.domain.patient.IPatientRepository;
@@ -24,7 +25,10 @@ public class AppointmentScheduleService {
     private IPatientRepository patientRepository;
 
     @Autowired
-    private List<IAppointmentSchedulingValidator> validators;
+    private List<IAppointmentSchedulingValidator> creationValidators;
+
+    @Autowired
+    private List<ICancellationSchedulerValidator> cancellationValidators;
 
     public ReadScheduleDetailedDTO Schedule(CreateScheduleDTO scheduleDTO){
         if (scheduleDTO.idDoctor() != null && !doctorRepository.existsById(scheduleDTO.idDoctor())) {
@@ -37,20 +41,29 @@ public class AppointmentScheduleService {
 
         //Como a lista é feita da interface e existem diversas classes que implementão essa interface, quando faço esse
         //ForEach, o Spring executa o método VALID de todas as classe.
-        validators.forEach(v -> v.valid(scheduleDTO));
+        creationValidators.forEach(v -> v.valid(scheduleDTO));
 
         Patient patient = patientRepository.getReferenceById(scheduleDTO.idPatient());
         Doctor doctor =  ChooseDoctor(scheduleDTO);
         if (doctor == null)
             throw new ValidationException("Nenhum médico livre nesta data");
 
-        Appointment schedule = new Appointment(null, doctor, patient, scheduleDTO.data());
+        Appointment schedule = new Appointment(null, doctor, patient, scheduleDTO.data(), null, false);
 
         repository.save(schedule);
 
         return new ReadScheduleDetailedDTO(schedule);
     }
+    public void Delete(DeleteAppointmentDTO appointmentDTO){
+        if ( !repository.existsById(appointmentDTO.idAppointment()) )
+            throw new ValidationException("Consulta não encontrada");
 
+        Appointment appointment = repository.getReferenceById(appointmentDTO.idAppointment());
+
+        cancellationValidators.forEach(v -> v.valid(appointmentDTO));
+
+        appointment.DeleteLogic(appointmentDTO.reason());
+    }
     private Doctor ChooseDoctor(CreateScheduleDTO scheduleDTO) {
 
         if (scheduleDTO.idDoctor() != null)

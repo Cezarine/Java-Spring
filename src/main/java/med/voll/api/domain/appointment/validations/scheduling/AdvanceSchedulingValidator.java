@@ -1,4 +1,4 @@
-package med.voll.api.domain.appointment.validations;
+package med.voll.api.domain.appointment.validations.scheduling;
 
 import jakarta.validation.ValidationException;
 import med.voll.api.domain.appointment.CreateScheduleDTO;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-@Component
-public class AdvanceScheduleValidator implements IAppointmentSchedulingValidator {
+@Component("ValidatorEarlyScheduleCreation")
+public class AdvanceSchedulingValidator implements IAppointmentSchedulingValidator {
     public void valid(CreateScheduleDTO scheduleDTO){
         LocalDateTime appointmentDate = scheduleDTO.data();
 

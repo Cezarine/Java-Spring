@@ -28,4 +28,12 @@ public class Appointment {
 
     private LocalDateTime data;
 
+    private String reason_cancellation;
+
+    private boolean cancelled;
+
+    public void DeleteLogic(String reason) {
+        this.reason_cancellation = reason;
+        this.cancelled = true;
+    }
 }
