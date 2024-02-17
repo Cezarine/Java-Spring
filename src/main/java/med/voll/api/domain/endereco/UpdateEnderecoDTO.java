@@ -5,22 +5,22 @@ import jakarta.validation.constraints.Pattern;
 
 public record UpdateEnderecoDTO(
         @NotBlank
-        String logradouro,
+        String adress,
 
         @NotBlank
-        String bairro,
+        String neighborhood,
 
         @NotBlank
         @Pattern(regexp = "\\d{8}")
-        String cep,
+        String zip_code,
 
         @NotBlank
-        String cidade,
+        String city,
 
         @NotBlank
         String uf,
 
-        String numero,
+        String number,
 
-        String complemento) {
+        String complement) {
 }

@@ -2,7 +2,7 @@ package med.voll.api.domain.appointment;
 
 import jakarta.persistence.*;
 import lombok.*;
-import med.voll.api.domain.medico.Medico;
+import med.voll.api.domain.doctor.Doctor;
 import med.voll.api.domain.patient.Patient;
 
 import java.time.LocalDateTime;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "appointments")
-@Entity(name = "appointment")
+@Entity(name = "Appointment")
 @EqualsAndHashCode(of = "id")
 public class Appointment {
     @Id
@@ -19,13 +19,13 @@ public class Appointment {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medico_id")
-    private Medico medico;
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime data;
 
 }

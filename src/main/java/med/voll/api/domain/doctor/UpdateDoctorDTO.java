@@ -1,4 +1,4 @@
-package med.voll.api.domain.medico;
+package med.voll.api.domain.doctor;
 
 import jakarta.validation.constraints.NotNull;
 import med.voll.api.domain.endereco.UpdateEnderecoDTO;
@@ -6,7 +6,7 @@ import med.voll.api.domain.endereco.UpdateEnderecoDTO;
 public record UpdateDoctorDTO(
         @NotNull
         Long id,
-        String nome,
-        String telefone,
-        UpdateEnderecoDTO endereco) {
+        String name,
+        String tell,
+        UpdateEnderecoDTO adress) {
 }

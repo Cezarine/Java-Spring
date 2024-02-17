@@ -10,44 +10,44 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Endereco {
-    private String logradouro;
-    private String bairro;
-    private String cep;
-    private String cidade;
+    private String adress;
+    private String neighborhood;
+    private String zip_code;
+    private String city;
     private String uf;
-    private String numero;
-    private String complemento;
+    private String number;
+    private String complement;
 
     public Endereco(CreateEnderecoDTO enderecoDTO) {
-        this.bairro = enderecoDTO.bairro();
-        this.cep = enderecoDTO.cep();
+        this.neighborhood = enderecoDTO.neighborhood();
+        this.zip_code = enderecoDTO.zip_code();
         this.uf = enderecoDTO.uf();
-        this.cidade = enderecoDTO.cidade();
-        this.numero = enderecoDTO.numero();
-        this.complemento = enderecoDTO.complemento();
-        this.logradouro = enderecoDTO.logradouro();
+        this.city = enderecoDTO.city();
+        this.number = enderecoDTO.number();
+        this.complement = enderecoDTO.complement();
+        this.adress = enderecoDTO.adress();
     }
 
     public void UpdateAdress(UpdateEnderecoDTO dto) {
-        if (dto.logradouro() != null)
-            this.logradouro = dto.logradouro();
+        if (dto.adress() != null)
+            this.adress = dto.adress();
 
-        if (dto.cep() != null)
-            this.cep = dto.cep();
+        if (dto.zip_code() != null)
+            this.zip_code = dto.zip_code();
 
-        if (dto.bairro() != null)
-            this.bairro = dto.bairro();
+        if (dto.neighborhood() != null)
+            this.neighborhood = dto.neighborhood();
 
         if (dto.uf() != null)
             this.uf = dto.uf();
 
-        if (dto.cidade() != null)
-            this.cidade = dto.cidade();
+        if (dto.city() != null)
+            this.city = dto.city();
 
-        if (dto.numero() != null)
-            this.numero = dto.numero();
+        if (dto.number() != null)
+            this.number = dto.number();
 
-        if (dto.complemento() != null)
-            this.complemento = dto.complemento();
+        if (dto.complement() != null)
+            this.complement = dto.complement();
     }
 }

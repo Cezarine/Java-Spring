@@ -1,4 +1,4 @@
-package med.voll.api.domain.medico;
+package med.voll.api.domain.doctor;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -10,14 +10,14 @@ import med.voll.api.domain.endereco.CreateEnderecoDTO;
 public record CreateDoctorDTO(
 
         @NotBlank
-        String nome,
+        String name,
 
         @NotBlank
         @Email
         String email,
 
         @NotBlank
-        String telefone,
+        String tell,
 
         @NotBlank
         @Pattern(regexp = "\\d{4,6}")
@@ -28,5 +28,5 @@ public record CreateDoctorDTO(
 
         @NotNull
         @Valid
-        CreateEnderecoDTO endereco) {
+        CreateEnderecoDTO adress) {
 }
